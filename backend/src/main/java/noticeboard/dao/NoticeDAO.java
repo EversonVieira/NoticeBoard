@@ -12,9 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 public interface NoticeDAO extends JpaRepository<Notice,Integer> {
+
     @Transactional(readOnly = true)
     Notice findByTitle(String Title);
-
-
 
 }
