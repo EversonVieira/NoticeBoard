@@ -1,0 +1,32 @@
+<div class="header">
+    <label>NoticeBoard</label>
+</div>
+
+<div class="body">
+    <div class="input-section">
+        <div class="input-container">
+            <label>Title</label>
+            <input [(ngModel)]="globalNotice.title">
+        </div>
+        <div class="input-container">
+            <label>Description</label>
+            <textarea [(ngModel)]="globalNotice.description">{{globalNotice.description}}</textarea>
+        </div>
+        <div class="flex">
+            <button class="margin" (click)="save()">Enviar</button>
+        </div>
+    </div>
+
+    <div class="table">
+        <div class="row border-bottom">
+            <div class="pagination">
+                <button (click)="goBack()" [disabled]="currentpage <= 1">Go Back</button>
+                <label>{{currentpage}}</label>
+                <button (click)="goForward()" [disabled]="blockGoForward">Go Forward</button>
+            </div>
+        </div>
+        <div class="row" *ngFor="let notice of noticeList">
+            <app-notice-row [outsideNotice]="notice"></app-notice-row>
+        </div>
+    </div>
+</div>

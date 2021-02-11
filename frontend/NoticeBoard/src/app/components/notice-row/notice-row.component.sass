@@ -1,0 +1,64 @@
+:host
+    display: flex
+    width: 99%
+    flex-direction: row
+    padding: 10px 2px
+    
+.row
+    display: flex
+    width: 100%
+    
+    padding: 10px
+    flex-direction: row
+    &:hover
+        background: #ccc
+    
+.title
+    width: 100%
+    padding: 15px 
+    font-size: 24px
+    font-weight: bold
+    color: #333
+.description
+    padding: 15px 
+    font-size: 16px
+    font-weight: normal
+    color: #666
+    width: 85%
+.data
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    justify-content: center
+    width: 90%
+    height: 100%
+    border-right: 1px solid #64b0f7
+    &:hover
+        cursor: pointer
+    label
+        max-width: 80%
+.action
+    display: flex
+    flex-direction: column
+    justify-content: right
+    align-items: center
+    width: 10%
+    button
+        text-decoration: none
+        outline: none
+        background: #64b0f7
+        width: 100px
+        height: 50px
+        margin: 5px
+        border: 1px solid #64b0f7
+        border-radius: 20px
+        color: #fff
+        &:hover
+            cursor: pointer
+            background: #3a7fc0
+
+span
+    padding: 0 15px
+    border-radius: 20px
+    background: #ff3535
+    color: #fff

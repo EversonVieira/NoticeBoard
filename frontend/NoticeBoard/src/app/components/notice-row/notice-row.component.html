@@ -1,0 +1,15 @@
+<div class="row" *ngIf="notice">
+    <div class="data" >
+        <label class="title">{{notice.title}} <span *ngIf="!notice.viewDate">new</span></label>   
+        <textarea class="description" [(ngModel)]="notice.description"  *ngIf="isOpen">{{notice.description}}</textarea>
+        <label class="description" *ngIf="isOpen">publishDate: {{publishDate}}</label>
+        <label class="description" *ngIf="isOpen && !!viewDate">viewDate: {{viewDate}}</label>
+
+    </div>
+    <div class="action">
+        <button (click)="setOpenState()">{{isOpen ? 'Colapse':'Expand'}}</button>
+        <button *ngIf="isOpen" (click)="update()">Update</button>
+        <button *ngIf="isOpen" (click)="delete()">Delete</button>
+    </div>
+</div>
+
