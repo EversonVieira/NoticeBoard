@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import { Notice } from '../../models/notice';
 import { NoticeService } from '../../services/notice-service.service'
@@ -15,6 +16,7 @@ export class NoticeRowComponent implements OnInit {
   publishDate: any = ''
   isOpen:Boolean = false;
   @Input() outsideNotice?:Notice = undefined
+  @Output() rebase = new EventEmitter();
   constructor(private noticeService:NoticeService) { 
   }
 
@@ -63,7 +65,7 @@ export class NoticeRowComponent implements OnInit {
         this.noticeService.delete(this.notice).subscribe(response => {
           if(response){
             alert("Success!");
-            this.notice = null
+            this.rebase.emit("completed");
           }
         });
       }

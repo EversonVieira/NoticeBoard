@@ -17,6 +17,9 @@ export class MainScreenComponent implements OnInit {
   constructor(private noticeService:NoticeService) { }
 
   ngOnInit(): void {
+    this.getList();
+  }
+  getList(){
     this.noticeService.getList(this.currentpage).subscribe(response => {
       this.noticeList = response;
     });

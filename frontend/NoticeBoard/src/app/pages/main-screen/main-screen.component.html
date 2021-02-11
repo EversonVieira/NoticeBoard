@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="row" *ngFor="let notice of noticeList">
-            <app-notice-row [outsideNotice]="notice"></app-notice-row>
+            <app-notice-row [outsideNotice]="notice" (rebase)="getList()"></app-notice-row>
         </div>
     </div>
 </div>
