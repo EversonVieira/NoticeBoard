@@ -19,9 +19,13 @@ export class MainScreenComponent implements OnInit {
   ngOnInit(): void {
     this.getList();
   }
+  
   getList(){
     this.noticeService.getList(this.currentpage).subscribe(response => {
       this.noticeList = response;
+    },error =>{
+      console.log(error);
+      alert(`Failed because: ${error.toString()}`);
     });
   }
   goForward(){
@@ -33,6 +37,8 @@ export class MainScreenComponent implements OnInit {
         this.blockGoForward = true
         return;
       }
+    },error =>{
+      alert(`Failed because: ${error.toString()}`);
     });
   }
   goBack(){
@@ -58,8 +64,12 @@ export class MainScreenComponent implements OnInit {
 
         this.noticeService.getList(this.currentpage).subscribe(response =>{
           this.noticeList = response;
+        },error =>{
+          alert(`Failed because: ${error.toString()}`);
         })
       }
+    },error =>{
+      alert(`Failed because: ${error.toString()}`);
     });
 
   }

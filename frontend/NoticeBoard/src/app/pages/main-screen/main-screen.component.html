@@ -22,7 +22,7 @@
             <div class="pagination">
                 <button (click)="goBack()" [disabled]="currentpage <= 1">Go Back</button>
                 <label>{{currentpage}}</label>
-                <button (click)="goForward()" [disabled]="blockGoForward">Go Forward</button>
+                <button (click)="goForward()" [disabled]="blockGoForward || noticeList.length < 5">Go Forward</button>
             </div>
         </div>
         <div class="row" *ngFor="let notice of noticeList">

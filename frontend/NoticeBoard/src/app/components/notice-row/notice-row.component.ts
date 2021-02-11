@@ -11,74 +11,86 @@ import { NoticeService } from '../../services/notice-service.service'
 })
 export class NoticeRowComponent implements OnInit {
 
-  notice:any = {};
+  notice: any = {};
   viewDate: any = ''
   publishDate: any = ''
-  isOpen:Boolean = false;
-  @Input() outsideNotice?:Notice = undefined
+  isOpen: Boolean = false;
+  @Input() outsideNotice?: Notice = undefined
   @Output() rebase = new EventEmitter();
-  constructor(private noticeService:NoticeService) { 
+  constructor(private noticeService: NoticeService) {
   }
 
   ngOnInit(): void {
     this.notice = this.outsideNotice;
 
     this.publishDate = moment(this.notice.publishDate).toDate();
-    this.viewDate = !!this.notice.viewDate ? moment(this.notice.viewDate).toDate(): this.viewDate;
+    this.viewDate = !!this.notice.viewDate ? moment(this.notice.viewDate).toDate() : this.viewDate;
 
   }
-  setOpenState(){
+  setOpenState() {
     this.isOpen = !this.isOpen;
     this.sendViewUpdate();
   }
-  sendViewUpdate(){
-    if (!this.notice.viewDate){
-      if(!!this.notice){
-       this.noticeService.update(this.notice).subscribe(response=>{
-         if (response){
-           this.get();
-         }
-       })
-      }
-      else{
-        alert("Notice doesn't have a value");
-      }
-    }
-  }
-  get(){
-    if (!this.notice?.viewDate){
-      if(!!this.notice){
-        this.noticeService.getById(this.notice.id).subscribe(response=>{
-          this.notice = response;
-          this.publishDate = moment(this.notice.publishDate).toDate();
-          this.viewDate = !!this.notice.viewDate ? moment(this.notice.viewDate).toDate(): this.viewDate;
-      
+  sendViewUpdate() {
+    if (!this.notice.viewDate) {
+      if (!!this.notice) {
+        this.noticeService.update(this.notice).subscribe(response => {
+          if (response) {
+            this.get();
+          }
+        },error =>{
+          alert(`Failed because: ${error.toString()}`);
         })
       }
-      else{
+      else {
         alert("Notice doesn't have a value");
       }
     }
   }
-  delete(){
-      if(!!this.notice){
-        this.noticeService.delete(this.notice).subscribe(response => {
-          if(response){
-            alert("Success!");
-            this.rebase.emit("completed");
-          }
-        });
+  get() {
+    if (!!this.notice) {
+      if (!this.notice.viewDate) {
+        this.noticeService.getById(this.notice.id).subscribe(response => {
+          this.notice = response;
+          this.publishDate = moment(this.notice.publishDate).toDate();
+          this.viewDate = !!this.notice.viewDate ? moment(this.notice.viewDate).toDate() : this.viewDate;
+        },error =>{
+          alert(`Failed because: ${error.toString()}`);
+        })
       }
-      else{
+      else {
         alert("Notice doesn't have a value");
       }
+    }
   }
-  update(){
-    this.noticeService.update(this.notice).subscribe(response=>{
-      if(response){
-        alert("Success!");
-      }
-    })
+  delete() {
+    if (!!this.notice) {
+      this.noticeService.delete(this.notice).subscribe(response => {
+        if (response) {
+          alert("Success!");
+          this.rebase.emit("completed");
+        }
+      },error =>{
+        alert(`Failed because: ${error.toString()}`);
+      });
+    }
+    else {
+      alert("Notice doesn't have a value");
+    }
+  }
+  update() {
+    if (!!this.notice) {
+      this.noticeService.update(this.notice).subscribe(response => {
+        if (response) {
+          alert("Success!");
+        }
+      },error =>{
+        alert(`{Failed because: ${error.toString()}`)
+      })
+    }
+    else {
+      alert("Notice doesn't have a value");
+    }
   }
 
 }

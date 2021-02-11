@@ -4,10 +4,9 @@
         <textarea class="description" [(ngModel)]="notice.description"  *ngIf="isOpen">{{notice.description}}</textarea>
         <label class="description" *ngIf="isOpen">publishDate: {{publishDate}}</label>
         <label class="description" *ngIf="isOpen && !!viewDate">viewDate: {{viewDate}}</label>
-
     </div>
     <div class="action">
-        <button (click)="setOpenState()">{{isOpen ? 'Colapse':'Expand'}}</button>
+        <button (click)="setOpenState()">{{isOpen ? 'Collapse':'Expand'}}</button>
         <button *ngIf="isOpen" (click)="update()">Update</button>
         <button *ngIf="isOpen" (click)="delete()">Delete</button>
     </div>
